@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ders Ekle-Çıkar</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="dersler">
+		<p:growl id="msgs" showDetail="true" />
+
+		
+			<p:dataTable id="dtseç" var="ders"
+				value="#{dersBean.secilebilecekDersler}"
+				selection="#{dersBean.secilenDersler}" rowKey="#{ders.id}"
+				style="margin-bottom:0">
+
+				<p:column selectionMode="multiple"
+					style="width:16px;text-align:center" />
+
+				<p:column headerText="Ders Adı">
+					<h:outputText value="#{ders.dersAdi}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton id="Ekle" update="dersler" value="Dersleri Al"
+						action="#{dersBean.dersleriAl}" />
+				</f:facet>
+			</p:dataTable>
+		
+
+	
+			<p:dataTable id="dtgos" var="dersc"
+				value="#{dersBean.secilmisDersler}"
+				selection="#{dersBean.cikicakDersler}" rowKey="#{dersc.id}"
+				style="margin-bottom:0">
+
+				<p:column selectionMode="multiple"
+					style="width:16px;text-align:center" />
+
+				<p:column headerText="Ders Adı">
+					<h:outputText value="#{dersc.dersAdi}" />
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton id="Sil" update="dersler" value="Dersleri Sil"
+						action="#{dersBean.dersleriSil}" />
+				</f:facet>
+
+			</p:dataTable>
+
+
+	
+
+	</h:form>
+
+
+</h:body>
+</html>

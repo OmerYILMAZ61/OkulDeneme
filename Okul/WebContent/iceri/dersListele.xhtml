@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+
+	<p:panelGrid columns="2" id="dersler">
+
+		<h:form>
+			<p:dataTable id="tbl" var="ders" value="#{dersBean.dersList}"
+				paginator="true" rows="10">
+
+				<p:column headerText="Id">
+					<h:outputText value="#{ders.id}" />
+				</p:column>
+
+				<p:column headerText="Ders Adi">
+					<h:outputText value="#{ders.dersAdi}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+		<h:form>
+			<p:panel>
+
+				<p:panel>
+					<h:outputText value="Ders Ekle" />
+					<br />
+					<p:inputText value="#{dersBean.dersAdd.dersAdi}" />
+					<br />
+					<p:commandButton id="dersEkle" value="Ders Ekle"
+						action="#{dersBean.dersEkle}" update="dersler" />
+				</p:panel>
+
+				<p:separator />
+
+				<p:panel>
+
+					<h:outputText value="Ders Sil" />
+					<br />
+					<p:selectOneMenu id="DersSil" converter="DersConverter" value="#{dersBean.dersSil}"
+						style="width:125px" filter="true"
+						filterMatchMode="contains" showCheckbox="true">
+						
+						<f:selectItems var="ders" itemLabel="#{ders.dersAdi}" itemValue="#{ders}" value="#{dersBean.dersList}" />
+						
+					</p:selectOneMenu>
+					<br />
+
+					<p:commandButton id="dersSil" value="Ders Sil"
+						action="#{dersBean.dersSil}" update="dersler"></p:commandButton>
+
+				</p:panel>
+
+			</p:panel>
+		</h:form>
+
+	</p:panelGrid>
+
+</h:body>
+</html>

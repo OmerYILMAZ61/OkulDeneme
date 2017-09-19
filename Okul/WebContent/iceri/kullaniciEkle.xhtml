@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="kullanici">
+
+		<p:panelGrid columns="2">
+
+			<h:outputText id="kullaniciAdd" value="kullanici Adi" />
+			<p:inputText value="#{kullaniciBean.kullaniciAdd.kullaniciAdi}" />
+
+			<h:outputText id="sifreAdd" value="Sifre" />
+			<p:password value="#{kullaniciBean.kullaniciAdd.sifre}" />
+
+			<h:outputText id="roll" value="Rolü" />
+			<p:selectOneMenu id="rol" converter="RolConverter" value="#{kullaniciBean.secilenRol}">
+				
+				<f:selectItems var="rol" itemValue="#{rol}" itemLabel="#{rol.name}"
+					value="#{kullaniciBean.rolList}" />
+			</p:selectOneMenu>
+
+			<h:outputText></h:outputText>
+			<p:commandButton value="Kullanici Ekle"
+				action="#{kullaniciBean.kullaniciEkle}" update="kullanici"></p:commandButton>
+
+		</p:panelGrid>
+	</h:form>
+
+
+</h:body>
+</html>

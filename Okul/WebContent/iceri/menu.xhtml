@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="menu">
+		<p:growl autoUpdate="true" />
+		<p:menubar orientation="horizonal" style="margin-top:20px">
+			<p:submenu label="Kullanici" icon="ui-icon-check"
+				rendered="#{loginBean.kullanici.rol.name eq 'admin'}">
+
+
+				<p:menuitem value="Kullanici Ekle" url="kullaniciEkle.xhtml" />
+				<p:separator />
+				<p:menuitem value="kullanicilari Güncelle"
+					url="kullaniciGuncelle.xhtml" />
+				<p:separator />
+
+			</p:submenu>
+
+			<p:submenu label="Öğrenci İşlemleri" icon="ui-icon-check">
+
+				<p:menuitem value="Öğrenci Listele" url="ogrenciListele.xhtml"
+					rendered="#{(loginBean.kullanici.rol.name eq 'admin') or
+				(loginBean.kullanici.rol.name eq 'mudur') or (loginBean.kullanici.rol.name eq 'öğretmen')}" />
+				<p:separator />
+				
+				<p:menuitem value="Ders Al " url="dersleriAl.xhtml"
+					rendered="#{loginBean.kullanici.rol.name eq 'öğrenci'}" />
+				<p:separator />
+
+				<p:menuitem value="Not Görüntüle" url="notGoruntule.xhtml"
+					rendered="#{!(loginBean.kullanici.rol.name eq 'öğrenci' or 
+				loginBean.kullanici.rol.name eq 'hademe') }" />
+				<p:separator />
+				<p:menuitem value="Not Görüntüle " url="notGoruntuleOgr.xhtml"
+					rendered="#{loginBean.kullanici.rol.name eq 'öğrenci'}" />
+				<p:separator />
+
+			</p:submenu>
+
+			<p:submenu label="Ders İşlemleri" icon="ui-icon-check"
+				rendered="#{loginBean.kullanici.rol.name eq 'admin'}">
+
+				<p:menuitem value="Dersler" url="dersListele.xhtml" />
+				<p:separator />
+
+
+			</p:submenu>
+
+			
+			<p:submenu label="Rol" icon="ui-icon-check"
+				rendered="#{loginBean.kullanici.rol.name eq 'admin'}">
+
+				<p:menuitem value="Roller" url="rollistele.xhtml" />
+				<p:separator />
+
+
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" placeholder="Search">
+					<p:ajax event="blur" />
+				</p:inputText>
+				<p:commandButton value="Çıkış Yap" icon="ui-icon-extlink"
+					action="#{loginBean.cikisYap()}" />
+			</f:facet>
+
+		</p:menubar>
+
+	</h:form>
+
+</ui:composition>
+
+</html>
