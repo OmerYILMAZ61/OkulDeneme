@@ -15,8 +15,7 @@ public class Dersler {
 	@Column(name = "Ders_Adi")
 	private String dersAdi;
 	
-	@Column(name = "Notlar")
-	private float not;
+
 	
 	public int getId() {
 		return id;
@@ -34,10 +33,5 @@ public class Dersler {
 		this.dersAdi = dersAdi;
 	}
 	
-	public void setNot(float not) {
-		this.not = not;
-	}
-	public float getNot() {
-		return not;
-	}
+
 }

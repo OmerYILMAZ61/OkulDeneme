@@ -15,20 +15,24 @@
 
 	<h:form id="Notlar">
 
-		<p:dataTable id="tblogr" var="dersSon"
-			value="#{dersBean.dersSonucla()}">
+		<p:dataTable id="tblogr" var="notSon" value="#{notBean.notlar}">
 			<p:column headerText="Id">
-				<h:outputText value="#{dersSon.id}" />
+				<h:outputText value="#{notSon.id}" />
+			</p:column>
+
+			<p:column headerText="Kullanici Adi">
+				<h:outputText value="#{notSon.kul.kullaniciAdi}" />
 			</p:column>
 
 			<p:column headerText="Ders Adi">
-				<h:outputText value="#{dersSon.dersAdi}" />
+				<h:outputText value="#{notSon.ders.dersAdi}" />
 			</p:column>
 
-			<p:column headerText="Roller">
-					<h:outputText value="#{dersSon.not}" />
+			<p:column headerText="Sonuc">
+				<h:outputText value="#{notSon.sonuc}" />
 			</p:column>
-			
+
+
 		</p:dataTable>
 	</h:form>
 

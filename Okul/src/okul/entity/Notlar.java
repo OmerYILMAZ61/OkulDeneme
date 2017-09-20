@@ -1,9 +1,9 @@
 package okul.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Notlar {
@@ -11,12 +11,14 @@ public class Notlar {
 	@Id
 	@GeneratedValue
 	private int id;
+
+	private Float sonuc;
+
+	@OneToOne
+	private Kullanici kul;
 	
-	@Column(name = "Ders_Adi")
-	private String dersAdi;
-	
-	@Column(name = "Notlar")
-	private float not;
+	@OneToOne
+	private Dersler ders;
 	
 	public int getId() {
 		return id;
@@ -26,18 +28,29 @@ public class Notlar {
 		this.id = id;
 	}
 
-	public String getDersAdi() {
-		return dersAdi;
+
+	public Float getSonuc() {
+		return sonuc;
 	}
 
-	public void setDersAdi(String dersAdi) {
-		this.dersAdi = dersAdi;
+	public void setSonuc(Float sonuc) {
+		this.sonuc = sonuc;
 	}
-	
-	public void setNot(float not) {
-		this.not = not;
+
+	public Kullanici getKul() {
+		return kul;
 	}
-	public float getNot() {
-		return not;
+
+	public void setKul(Kullanici kul) {
+		this.kul = kul;
 	}
+
+	public Dersler getDers() {
+		return ders;
+	}
+
+	public void setDers(Dersler ders) {
+		this.ders = ders;
+	}
+
 }

@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import okul.entity.Dersler;
 import okul.entity.GirisEntity;
 import okul.entity.Kullanici;
+import okul.entity.Notlar;
 import okul.entity.Rol;
 
 public class DAO {
@@ -272,6 +273,33 @@ public class DAO {
 			session.delete(obj);
 			tx.commit();
 
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	public List<Notlar> getNotlar() {
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Notlar.class);
+
+		List<Notlar> list = criteria.list();
+
+		return list;
+	}
+
+	public void cikar(Notlar not) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.delete(not);
+			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();

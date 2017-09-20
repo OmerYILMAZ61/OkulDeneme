@@ -12,6 +12,7 @@ import okul.dao.DAO;
 import okul.entity.Dersler;
 import okul.entity.GirisEntity;
 import okul.entity.Kullanici;
+import okul.entity.Notlar;
 
 @ManagedBean
 @SessionScoped
@@ -109,8 +110,20 @@ public class DersBean implements Serializable {
 		this.secilmisDersler=kullanici.getSecilenDersler();
 		this.secilebilecekDersler= secilebilcekleriGoster();
 		this.secilenDersler.clear();
+		dersvenotal(secilmisDersler,kullanici);
 	}
 	
+	private void dersvenotal(List<Dersler> secilmisDersler2, Kullanici kullanici2) {
+		Notlar not = new Notlar();
+		for (int i = 0; i < secilmisDersler2.size() ; i++) {
+			not.setKul(kullanici2);
+			not.setDers(secilmisDersler2.get(i));
+			DAO.getInstance().ekle(not);
+			System.out.println("aq");
+		}
+		
+	}
+
 	public void dersleriSil(){
 		
 		List<Dersler> dersList = LoginBean.getInstance().getKullanici().getSecilenDersler();
@@ -128,8 +141,21 @@ public class DersBean implements Serializable {
 		this.secilmisDersler=kullanici.getSecilenDersler();
 		this.secilebilecekDersler = secilebilcekleriGoster();
 		this.cikicakDersler.clear();
+		dersvenotSil(cikicakDersler,kullanici);
 	}
 	
+	private void dersvenotSil(List<Dersler> cikicakDersler2, Kullanici kullanici2) {
+
+		Notlar not = new Notlar();
+		for (int i = 0; i < cikicakDersler2.size() ; i++) {
+			not.setKul(kullanici2);
+			not.setDers(cikicakDersler2.get(i));
+			DAO.getInstance().cikar(not);
+			System.out.println("aq");
+		}
+		
+	}
+
 	public void setCikicakDersler(List<Dersler> cikicakDersler) {
 		this.cikicakDersler = cikicakDersler;
 	}

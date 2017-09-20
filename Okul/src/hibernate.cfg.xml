@@ -21,7 +21,7 @@
 		<mapping class="okul.entity.Rol" />
 		<mapping class="okul.entity.Dersler" />
 		<mapping class="okul.entity.GirisKayit" />
-
+		<mapping class="okul.entity.Notlar" />
 
 	</session-factory>
 </hibernate-configuration>
