@@ -107,6 +107,7 @@ public class DersBean implements Serializable {
 		girisEntity.setUserName(kullanici.getKullaniciAdi());
 		girisEntity.setPassWord(kullanici.getSifre());
 		this.kullanici = DAO.getInstance().checkUser(girisEntity);
+		
 		this.secilmisDersler=kullanici.getSecilenDersler();
 		this.secilebilecekDersler= secilebilcekleriGoster();
 		this.secilenDersler.clear();
@@ -119,9 +120,8 @@ public class DersBean implements Serializable {
 			not.setKul(kullanici2);
 			not.setDers(secilmisDersler2.get(i));
 			DAO.getInstance().ekle(not);
-			System.out.println("aq");
 		}
-		
+		NotBean.getInstance().notGetir();
 	}
 
 	public void dersleriSil(){
@@ -140,20 +140,22 @@ public class DersBean implements Serializable {
 		DAO.getInstance().dersleriAl(kullanici);
 		this.secilmisDersler=kullanici.getSecilenDersler();
 		this.secilebilecekDersler = secilebilcekleriGoster();
-		this.cikicakDersler.clear();
+		
 		dersvenotSil(cikicakDersler,kullanici);
 	}
 	
 	private void dersvenotSil(List<Dersler> cikicakDersler2, Kullanici kullanici2) {
 
 		Notlar not = new Notlar();
+		
 		for (int i = 0; i < cikicakDersler2.size() ; i++) {
 			not.setKul(kullanici2);
 			not.setDers(cikicakDersler2.get(i));
+			not = DAO.getInstance().notDersCikar(not);
 			DAO.getInstance().cikar(not);
-			System.out.println("aq");
 		}
-		
+		this.cikicakDersler.clear();
+		NotBean.getInstance().notGetir();
 	}
 
 	public void setCikicakDersler(List<Dersler> cikicakDersler) {

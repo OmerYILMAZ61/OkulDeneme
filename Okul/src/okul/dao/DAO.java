@@ -156,6 +156,7 @@ public class DAO {
 
 		List<Rol> list = criteria.list();
 
+		session.close();
 		return list;
 
 	}
@@ -221,6 +222,7 @@ public class DAO {
 
 		List<Dersler> list = criteria.list();
 
+		session.close();
 		return list;
 	}
 
@@ -299,6 +301,58 @@ public class DAO {
 		try {
 			tx = session.beginTransaction();
 			session.delete(not);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	public List<Notlar> getOgrNot(Kullanici kullanici) {
+
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Notlar.class);
+
+		criteria.add(Restrictions.eq("kul", kullanici));
+		
+		List<Notlar> list = criteria.list();
+		
+		return list;
+	}
+
+	public Notlar notDersCikar(Notlar not) {
+		
+		Notlar notlar = new Notlar();
+		
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Notlar.class);
+
+		criteria.add(Restrictions.eq("kul", not.getKul()));
+		
+		criteria.add(Restrictions.eq("ders", not.getDers()));
+
+		List<Notlar> list = criteria.list();
+
+		if (list.size() > 0)
+			notlar = list.get(0);
+		session.close();
+
+		return notlar;
+		
+	}
+
+	public void guncelle(Notlar not) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.merge(not);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

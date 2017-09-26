@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+
+	<h:form id="notGetir">
+
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:selectOneMenu id="ogrSec" converter="KullaniciConverter"
+			value="#{notBean.notuGirilcekOgr}">
+
+			<f:selectItems var="ogr" itemValue="#{ogr}"
+				itemLabel="#{ogr.kullaniciAdi}" value="#{kullaniciBean.ogrenciList}" />
+		</p:selectOneMenu>
+
+		<p:commandButton value="Getir" update="notGetir" id="nottt"
+			action="#{notBean.ogrencininNotlariGetir}" />
+
+
+
+		<p:dataTable id="NotGir" var="notGir"
+			value="#{notBean.ogrenciGirilecekNotlari}" editable="true"
+			style="margin-bottom:20px">
+			<f:facet name="header">
+           Row Editing
+       		</f:facet>
+
+			<p:ajax event="rowEdit" listener="#{notBean.onRowEdit}"
+				update=":notGetir:msgs" />
+			<p:ajax event="rowEditCancel" listener="#{notBean.onRowCancel}"
+				update=":notGetir:msgs" />
+
+
+			<p:column headerText="Öğrenci Adi">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{notGir.ders.dersAdi}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{notGir.ders.dersAdi}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Sonuc">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{notGir.sonuc}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{notGir.sonuc}" style="width:96%"
+							label="name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+
+</h:body>
+</html>

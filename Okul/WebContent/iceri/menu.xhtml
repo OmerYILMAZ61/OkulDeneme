@@ -40,12 +40,16 @@
 
 				<p:menuitem value="Not Görüntüle" url="notGoruntule.xhtml"
 					rendered="#{!(loginBean.kullanici.rol.name eq 'öğrenci' or 
-				loginBean.kullanici.rol.name eq 'hademe') }" />
+				loginBean.kullanici.rol.name eq 'hademe' or loginBean.kullanici.rol.name eq 'öğretmen' ) }" />
+				
 				<p:separator />
 				<p:menuitem value="Not Görüntüle " url="notGoruntuleOgr.xhtml"
 					rendered="#{loginBean.kullanici.rol.name eq 'öğrenci'}" />
 				<p:separator />
-
+				
+				<p:menuitem value="Not Görüntüle " url="notGoruntuleOgretmen.xhtml"
+					rendered="#{loginBean.kullanici.rol.name eq 'öğretmen'}" />
+				<p:separator />
 			</p:submenu>
 
 			<p:submenu label="Ders İşlemleri" icon="ui-icon-check"

@@ -1,6 +1,7 @@
 package okul.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -14,10 +15,10 @@ public class Notlar {
 
 	private Float sonuc;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	private Kullanici kul;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	private Dersler ders;
 	
 	public int getId() {
@@ -27,7 +28,6 @@ public class Notlar {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public Float getSonuc() {
 		return sonuc;

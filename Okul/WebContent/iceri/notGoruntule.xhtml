@@ -13,21 +13,26 @@
 	<ui:include src="menu.xhtml" />
 
 
-	<h:form id="kullanici">
+	<h:form id="Notlar">
 
-		<p:dataTable id="tblogr" var="ogr"
-			value="#{kullaniciBean.ogrenciList}">
+		<p:dataTable id="tblogr" var="notSon" value="#{notBean.notGetir()}" >
 			<p:column headerText="Id">
-				<h:outputText value="#{ogr.id}" />
+				<h:outputText value="#{notSon.id}" />
 			</p:column>
 
 			<p:column headerText="Kullanici Adi">
-				<h:outputText value="#{ogr.kullaniciAdi}" />
+				<h:outputText value="#{notSon.kul.kullaniciAdi}" />
 			</p:column>
 
-			<p:column headerText="Roller">
-					<h:outputText value="#{ogr.rol.name}" />
+			<p:column headerText="Ders Adi">
+				<h:outputText value="#{notSon.ders.dersAdi}" />
 			</p:column>
+
+			<p:column headerText="Sonuc">
+				<h:outputText value="#{notSon.sonuc}" />
+			</p:column>
+
+
 		</p:dataTable>
 	</h:form>
 

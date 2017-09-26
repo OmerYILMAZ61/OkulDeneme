@@ -15,7 +15,7 @@
 
 	<h:form id="Notlar">
 
-		<p:dataTable id="tblogr" var="notSon" value="#{notBean.notlar}">
+		<p:dataTable id="tblogr" var="notSon" value="#{notBean.notGetir()}" >
 			<p:column headerText="Id">
 				<h:outputText value="#{notSon.id}" />
 			</p:column>
